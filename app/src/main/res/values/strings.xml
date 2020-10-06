@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Kas Remaja</string>
+    <string name="version">Version 0.1 BETA</string>
+    <string name="login">Login</string>
+    <string name="username">Username</string>
+    <string name="title_login">Please login to continue</string>
+    <string name="password">Password</string>
+    <string name="forget_password">Forget Password?</string>
+    <string name="register">Register</string>
+    <string name="saldo">SALDO</string>
+    <string name="titleSay">Selamat Malam,</string>
+    <string name="titleUsername">Username</string>
+    <string name="title_brosur">title Brosur</string>
+    <string name="titleSize">Size : 289.83 KB</string>
+    <string name="titleTanggal">Tanggal upload : 20-09-2020</string>
+    <string name="brosur_terbaru">Brosur Terbaru</string>
+
+    <string name="foo">Lorem Ipsum</string>
+    <string name="title_open_browser">Buka di Browser</string>
+    <string name="title_notification">Title Notification</string>
+    <string name="dec_notification">Deskripsi Notification</string>
+    <string name="notification">Notification</string>
+    <string name="title_download">Download</string>
+    <string name="lihat">Lihat</string>
+</resources>

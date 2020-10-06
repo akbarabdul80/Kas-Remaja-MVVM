@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.webview.WebviewActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shWebView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:duration="800">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_60"
+                android:background="@color/placeholder_transparent" />
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="@dimen/size_32"
+            android:layout_height="@dimen/size_32"
+            android:layout_marginStart="@dimen/padding_15"
+            android:layout_marginLeft="@dimen/padding_15"
+            android:layout_marginTop="@dimen/padding_15"
+            android:layout_marginBottom="@dimen/padding_15"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/tvLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:drawablePadding="@dimen/padding_5"
+            android:fontFamily="@font/bold"
+            android:text="@string/foo"
+            android:textColor="@color/green"
+            android:textSize="@dimen/font_14"
+            app:drawableLeftCompat="@drawable/ic_https"
+            app:drawableStartCompat="@drawable/ic_https" />
+
+        <TextView
+            android:id="@+id/tvButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/padding_15"
+            android:layout_marginRight="@dimen/padding_15"
+            android:fontFamily="@font/regular"
+            android:text="@string/title_open_browser"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_13" />
+    </RelativeLayout>
+
+    <WebView
+        android:id="@+id/wvPage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
