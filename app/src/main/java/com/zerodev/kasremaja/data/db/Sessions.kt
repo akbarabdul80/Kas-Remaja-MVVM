@@ -13,8 +13,9 @@ class Sessions(context : Context) {
 
         val id_user : String = "id_user"
         val username : String = "username"
-        val email : String = "email"
-        val token : String = "token"
+        val fullname : String = "fullname"
+        val img_user : String = "img_user"
+        val level : String = "level"
     }
 
     var pref : SharedPreferences

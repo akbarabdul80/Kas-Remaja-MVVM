@@ -21,7 +21,7 @@ class LoginViewModel : ViewModel() {
         password : String
     ) {
         progressLogin.value = true
-        App.disposable!!.add(
+        App.disposable.add(
             App.service!!.postLogin(username, password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

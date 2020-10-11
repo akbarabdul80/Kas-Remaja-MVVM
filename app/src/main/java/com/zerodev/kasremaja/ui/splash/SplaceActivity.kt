@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import com.zerodev.kasremaja.R
 import com.zerodev.kasremaja.root.App
+import com.zerodev.kasremaja.ui.dashboard.DashboardActivity
 import com.zerodev.kasremaja.ui.login.LoginActivity
 
 class SplaceActivity : AppCompatActivity() {
@@ -15,7 +16,7 @@ class SplaceActivity : AppCompatActivity() {
 
         Handler().postDelayed({
             if (App.sessions!!.isLogin()){
-                startActivity(Intent(applicationContext, LoginActivity::class.java))
+                startActivity(Intent(applicationContext, DashboardActivity::class.java))
             }else{
                 startActivity(Intent(applicationContext, LoginActivity::class.java))
             }

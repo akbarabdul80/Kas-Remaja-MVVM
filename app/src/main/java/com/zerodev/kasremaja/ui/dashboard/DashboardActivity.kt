@@ -3,6 +3,7 @@
 package com.zerodev.kasremaja.ui.dashboard
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.DownloadManager
 import android.content.Context
 import android.content.Intent
@@ -15,15 +16,21 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.zerodev.kasremaja.R
+import com.zerodev.kasremaja.data.db.Sessions
 import com.zerodev.kasremaja.data.model.brosur.DataBrosur
+import com.zerodev.kasremaja.root.App
 import com.zerodev.kasremaja.ui.notification.NotificationActivity
 import com.zerodev.kasremaja.ui.webview.WebviewActivity
+import com.zerodev.kasremaja.utils.Converter
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.bottom_file.view.*
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class DashboardActivity : AppCompatActivity(),
@@ -33,56 +40,63 @@ class DashboardActivity : AppCompatActivity(),
     lateinit var viewModel: DashboardViewModel
     val data: MutableList<DataBrosur> = ArrayList()
 
+    @SuppressLint("SimpleDateFormat", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
 
-        @Suppress("DEPRECATION")
-        viewModel = ViewModelProviders.of(this).get(DashboardViewModel::class.java)
+        when (SimpleDateFormat("hh").format(Date()).toInt()) {
+            in 0..11 -> {
+                tvSayhello.text = "Selamat Pagi,"
+            }
+            in 12..14 -> {
+                tvSayhello.text = "Selamat Siang,"
+            }
+            in 15..17 -> {
+                tvSayhello.text = "Selamat Sore,"
+            }
+            else -> {
+                tvSayhello.text = "Selamat Malam,"
+            }
+        }
 
-        data.add(
-            0, DataBrosur(
-                "1",
-                "Hukum Mencuri Bag 3",
-                "Size : 2 Mb",
-                "Tanggal : 01-02-2002",
-                "https://mta.or.id/download/31/download-brosur/1621/201004-hidup-sesudah-mati-bag-10.pdf",
-                "https://docs.google.com/viewer?url=https%3A%2F%2Fmta.or.id%2Fwp-admin%2Fadmin-ajax.php%3Fjuwpfisadmin%3Dfalse%26action%3Dwpfd%26task%3Dfile.download%26wpfd_category_id%3D31%26wpfd_file_id%3D1621%26token%3D2913046b504bf439fce67962bd77c712%26preview%3D1&embedded=true"
-            )
-        )
+        tvUsername.text = App.sessions!!.getString(Sessions.username)
 
-        data.add(
-            0, DataBrosur(
-                "2",
-                "Hukum Mencuri Bag 2",
-                "Size : 3 Mb",
-                "Tanggal : 17-01-2002",
-                "https://mta.or.id/download/31/download-brosur/1594/200920-hidup-sesudah-mati-bag-8.pdf",
-                "https://docs.google.com/viewer?url=https%3A%2F%2Fmta.or.id%2Fwp-admin%2Fadmin-ajax.php%3Fjuwpfisadmin%3Dfalse%26action%3Dwpfd%26task%3Dfile.download%26wpfd_category_id%3D31%26wpfd_file_id%3D1621%26token%3D2913046b504bf439fce67962bd77c712%26preview%3D1&embedded=true"
-            )
-        )
+        viewModel = ViewModelProvider(this).get(DashboardViewModel::class.java)
 
-        data.add(
-            0, DataBrosur(
-                "2",
-                "Hukum Mencuri Bag 1",
-                "Size : 4 Mb",
-                "Tanggal : 10-01-2002",
-                "https://mta.or.id/download/31/download-brosur/1578/200906-hidup-sesudah-mati-bag-6.pdf",
-                "https://docs.google.com/viewer?url=https%3A%2F%2Fmta.or.id%2Fwp-admin%2Fadmin-ajax.php%3Fjuwpfisadmin%3Dfalse%26action%3Dwpfd%26task%3Dfile.download%26wpfd_category_id%3D31%26wpfd_file_id%3D1621%26token%3D2913046b504bf439fce67962bd77c712%26preview%3D1&embedded=true"
-            )
-        )
+        viewModel.state.observe(this, { state ->
+            state?.let {
+                when(it){
+                    is DashboardState.Loading   -> {
+                        shDashboard.visibility = View.VISIBLE
+                        swDashboard.isRefreshing = false
+                        avKas.visibility = View.VISIBLE
+                        avSaldo.visibility = View.VISIBLE
+                        rvBrosur.visibility = View.INVISIBLE
+                        tvKas.visibility = View.INVISIBLE
+                        tvSaldo.visibility = View.INVISIBLE
+                    }
+                    is DashboardState.Result    -> {
+                        shDashboard.visibility = View.INVISIBLE
+                        avKas.visibility = View.INVISIBLE
+                        avSaldo.visibility = View.INVISIBLE
+                        rvBrosur.visibility = View.VISIBLE
+                        tvKas.visibility = View.VISIBLE
+                        tvSaldo.visibility = View.VISIBLE
 
-        data.add(
-            0, DataBrosur(
-                "3",
-                "Tata Cara Sholat Bag 3",
-                "Size : 4 Mb",
-                "Tanggal : 08-01-2002",
-                "https://mta.or.id/download/31/download-brosur/1562/200823-hidup-sesudah-mati-bag-4.pdf",
-                "https://docs.google.com/viewer?url=https%3A%2F%2Fmta.or.id%2Fwp-admin%2Fadmin-ajax.php%3Fjuwpfisadmin%3Dfalse%26action%3Dwpfd%26task%3Dfile.download%26wpfd_category_id%3D31%26wpfd_file_id%3D1621%26token%3D2913046b504bf439fce67962bd77c712%26preview%3D1&embedded=true"
-            )
-        )
+                        tvKas.text = Converter.formatRupiah(it.data.saldo)
+                        tvSaldo.text = Converter.formatRupiah(it.data.kas)
+
+                        data.clear()
+                        data.addAll(it.data.brosur)
+                        adapter.notifyDataSetChanged()
+                    }
+                    is DashboardState.Error     -> {
+                        App.showToast.toastThrowable(it.error)
+                    }
+                }
+            }
+        })
 
         adapter = DashboardAdapter(data, this)
         rvBrosur.also {
@@ -90,16 +104,26 @@ class DashboardActivity : AppCompatActivity(),
             it.layoutManager = LinearLayoutManager(this)
         }
 
-        askForPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, 101)
+        askForPermission()
 
         btnNotif.setOnClickListener {
             startActivity(Intent(applicationContext, NotificationActivity::class.java))
         }
 
+        swDashboard.setOnRefreshListener {
+            viewModel.getData(App.sessions!!.getString(Sessions.id_user))
+        }
     }
 
+    override fun onStart() {
+        super.onStart()
+        viewModel.getData(App.sessions!!.getString(Sessions.id_user))
+    }
 
-    private fun askForPermission(permission: String, requestCode: Int) {
+    private fun askForPermission() {
+
+        val permission: String = Manifest.permission.WRITE_EXTERNAL_STORAGE
+        val requestCode = 101
         if (ContextCompat.checkSelfPermission(
                 this,
                 permission
@@ -131,6 +155,7 @@ class DashboardActivity : AppCompatActivity(),
         }
     }
 
+    @SuppressLint("InflateParams")
     override fun onCLick(dataBrosur: DataBrosur) {
         val menu: View = layoutInflater.inflate(R.layout.bottom_file, null)
         val dialog = BottomSheetDialog(
@@ -181,7 +206,7 @@ class DashboardActivity : AppCompatActivity(),
         )
 
         val manager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-        val downloadId : Long = manager.enqueue(request)
-        Toast.makeText(applicationContext, "Sedang Mendownload", Toast.LENGTH_SHORT).show()
+        manager.enqueue(request)
+        App.showToast.toastDown("Sedang Mendownload")
     }
 }

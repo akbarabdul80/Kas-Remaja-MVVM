@@ -8,6 +8,33 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="toastdownload">
+        <item name="stTextBold">true</item>
+        <item name="stTextColor">@color/white</item>
+        <item name="stColorBackground">@color/colorPrimary</item>
+        <item name="stStrokeColor">@color/white</item>
+        <item name="stStrokeWidth">2dp</item>
+        <item name="stIconStart">@drawable/ic_download</item>
+    </style>
+
+    <style name="toastcheck">
+        <item name="stTextBold">true</item>
+        <item name="stTextColor">@color/white</item>
+        <item name="stColorBackground">@color/verifikasi</item>
+        <item name="stStrokeColor">@color/white</item>
+        <item name="stStrokeWidth">2dp</item>
+        <item name="stIconStart">@drawable/ic_check</item>
+    </style>
+
+    <style name="toasterror">
+        <item name="stTextBold">true</item>
+        <item name="stTextColor">@color/white</item>
+        <item name="stColorBackground">@color/red</item>
+        <item name="stStrokeColor">@color/white</item>
+        <item name="stStrokeWidth">2dp</item>
+        <item name="stIconStart">@drawable/ic_close</item>
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
@@ -25,5 +52,6 @@
     <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background"> @android:color/transparent</item>
     </style>
+
 
 </resources>

@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
@@ -12,7 +13,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.zerodev.sedekahku"
+        applicationId "com.zerodev.kasremaja"
         minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
@@ -63,12 +64,26 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
+    //Firebase
+    implementation 'com.google.firebase:firebase-messaging:20.3.0'
+    implementation 'com.google.firebase:firebase-analytics:17.6.0'
+
+//    implementation "com.redapplenet:HuicentCoreLibrary:1.0.5-rc3"
+    //Toast
+    implementation 'com.muddzdev:styleabletoast:2.2.4'
+
+    implementation platform('com.google.firebase:firebase-bom:25.11.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
     implementation 'com.android.support:multidex:1.0.3'
 
     //Library Material Design
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
+
+    //Image Round
+    implementation 'com.jcminarro:RoundKornerLayouts:0.2.0'
 
     //Avi Animation
     implementation 'com.wang.avi:library:2.1.3'

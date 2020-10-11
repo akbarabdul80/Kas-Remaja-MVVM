@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1089037615160",
+    "firebase_url": "https://kas-remaja.firebaseio.com",
+    "project_id": "kas-remaja",
+    "storage_bucket": "kas-remaja.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1089037615160:android:78652616e794916d0fa6cd",
+        "android_client_info": {
+          "package_name": "com.zerodev.kasremaja"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1089037615160-qedgqfn8rqnv74qva3ctan5511jmcmon.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zerodev.kasremaja",
+            "certificate_hash": "598d8e97bbab52a468074436fba6ced05631fd4e"
+          }
+        },
+        {
+          "client_id": "1089037615160-ulfmq6nbrhajf57j2qmpfc1c402opj18.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfcbQ9TN7U4M_1eWVXMFcDG1Kr3nPpv6c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1089037615160-ulfmq6nbrhajf57j2qmpfc1c402opj18.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
