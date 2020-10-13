@@ -1,5 +1,6 @@
 package com.zerodev.kasremaja.data.network
 
+import com.zerodev.kasremaja.data.model.history.ResponseHistory
 import com.zerodev.kasremaja.data.model.kas.ResponseKas
 import com.zerodev.kasremaja.data.model.login.ResponseLogin
 import com.zerodev.kasremaja.data.model.notification.ResponseNotification
@@ -33,4 +34,8 @@ interface ApiEndpoint {
     fun notification(
         @Query("id_user") id_user: String
     ): Single<ResponseNotification>
+
+    @GET("history")
+    fun history(
+    ): Single<ResponseHistory>
 }

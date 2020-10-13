@@ -1,6 +1,7 @@
 package com.zerodev.kasremaja.data.network
 
 import com.zerodev.kasremaja.BuildConfig
+import com.zerodev.kasremaja.data.model.history.ResponseHistory
 import com.zerodev.kasremaja.data.model.kas.ResponseKas
 import com.zerodev.kasremaja.data.model.login.ResponseLogin
 import com.zerodev.kasremaja.data.model.notification.ResponseNotification
@@ -54,5 +55,9 @@ class ApiService {
 
     fun getNotification(id_user: String) : Single<ResponseNotification>{
         return api.notification(id_user)
+    }
+
+    fun getHistory() : Single<ResponseHistory>{
+        return api.history()
     }
 }

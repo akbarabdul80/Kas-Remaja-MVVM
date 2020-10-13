@@ -23,6 +23,7 @@ import com.zerodev.kasremaja.R
 import com.zerodev.kasremaja.data.db.Sessions
 import com.zerodev.kasremaja.data.model.brosur.DataBrosur
 import com.zerodev.kasremaja.root.App
+import com.zerodev.kasremaja.ui.history.HistoryActivity
 import com.zerodev.kasremaja.ui.notification.NotificationActivity
 import com.zerodev.kasremaja.ui.webview.WebviewActivity
 import com.zerodev.kasremaja.utils.Converter
@@ -38,6 +39,7 @@ class DashboardActivity : AppCompatActivity(),
 
     lateinit var adapter: DashboardAdapter
     lateinit var viewModel: DashboardViewModel
+
     val data: MutableList<DataBrosur> = ArrayList()
 
     @SuppressLint("SimpleDateFormat", "SetTextI18n")
@@ -108,6 +110,10 @@ class DashboardActivity : AppCompatActivity(),
 
         btnNotif.setOnClickListener {
             startActivity(Intent(applicationContext, NotificationActivity::class.java))
+        }
+
+        btnHistory.setOnClickListener{
+            startActivity(Intent(applicationContext, HistoryActivity::class.java))
         }
 
         swDashboard.setOnRefreshListener {

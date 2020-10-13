@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
+import com.google.firebase.messaging.FirebaseMessaging
 import com.zerodev.kasremaja.R
 import com.zerodev.kasremaja.data.db.Sessions
 import com.zerodev.kasremaja.root.App
@@ -35,7 +36,7 @@ class LoginActivity : AppCompatActivity() {
                         etpassword.text.toString()
                 )
             } else {
-                Toast.makeText(applicationContext, "Mohon isi email dan password!", Toast.LENGTH_SHORT).show()
+                App.showToast.toastEror("Mohon isi email dan password!")
             }
 
         }
@@ -58,12 +59,13 @@ class LoginActivity : AppCompatActivity() {
                         App.sessions!!.putString(Sessions.img_user, it.data.img_user!!)
                         App.sessions!!.putString(Sessions.level, it.data.level!!)
 
-                        startActivity(Intent(applicationContext, DashboardActivity::class.java))
-                        Toast.makeText(applicationContext, it.message, Toast.LENGTH_SHORT).show()
+                        FirebaseMessaging.getInstance().subscribeToTopic(it.data.id_user.toString())
 
+                        startActivity(Intent(applicationContext, DashboardActivity::class.java))
+                        App.showToast.toastCheck(it.message!!)
                     }
                     false -> {
-                        Toast.makeText(applicationContext, it.message, Toast.LENGTH_SHORT).show()
+                        App.showToast.toastEror(it.message!!)
                     }
                 }
             }

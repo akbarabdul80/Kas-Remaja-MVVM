@@ -22,4 +22,5 @@
     <string name="notification">Notification</string>
     <string name="title_download">Download</string>
     <string name="lihat">Lihat</string>
+    <string name="title_history">History</string>
 </resources>
