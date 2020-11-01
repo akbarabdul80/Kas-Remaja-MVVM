@@ -8,7 +8,7 @@
 </p>
 <span align="center">
  <hr>
- <p align="center"><img src="screenshot/ss@3x-100.jpg" alt="Kas Remaja Apps SS" width="850" height="500"></p>
+ <p align="center"><img src="screenshot/ss@3x-100.jpg" alt="Kas Remaja Apps SS" width="auto" height="auto"></p>
  <p align="center">Screenshot</p>
  <hr>
  <br>
