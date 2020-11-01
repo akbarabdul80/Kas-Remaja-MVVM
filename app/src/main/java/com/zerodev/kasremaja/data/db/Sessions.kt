@@ -12,6 +12,8 @@ class Sessions(context : Context) {
         var PREF_NAME = BuildConfig.APPLICATION_ID+".session"
 
         val id_user : String = "id_user"
+        val email : String = "email"
+        val phone : String = "phone"
         val username : String = "username"
         val fullname : String = "fullname"
         val img_user : String = "img_user"

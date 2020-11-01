@@ -23,4 +23,21 @@
     <string name="title_download">Download</string>
     <string name="lihat">Lihat</string>
     <string name="title_history">History</string>
+    <string name="profile">Profile</string>
+    <string name="ganti_kata_sandi">Ganti Kata Sandi</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="fullname">fullname</string>
+    <string name="email">Email</string>
+    <string name="example_email">example@gmail.com</string>
+    <string name="akun">akun</string>
+    <string name="no_hp">No Hp</string>
+    <string name="example_phone">0812284754344</string>
+    <string name="logout">Logout</string>
+    <string name="nama_lengkap">Nama Lengkap</string>
+    <string name="nomer">No Hp</string>
+    <string name="update_profile">Update Profile</string>
+    <string name="edit_password">Edit Password</string>
+    <string name="password_lama">Password Lama</string>
+    <string name="password_baru">Password Baru</string>
+    <string name="re_password">Re-Password</string>
 </resources>

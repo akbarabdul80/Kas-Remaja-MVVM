@@ -13,6 +13,8 @@ class App : Application() {
         lateinit var disposable : CompositeDisposable
         lateinit var showToast: MakeToast
         var sessions : Sessions?= null
+
+        val server : String = "http://192.168.43.73/kas/"
     }
 
     override fun onCreate() {

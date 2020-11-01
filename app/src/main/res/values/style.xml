@@ -15,6 +15,7 @@
         <item name="stStrokeColor">@color/white</item>
         <item name="stStrokeWidth">2dp</item>
         <item name="stIconStart">@drawable/ic_download</item>
+        <item name="stFont"></item>
     </style>
 
     <style name="toastcheck">

@@ -25,6 +25,7 @@ import com.zerodev.kasremaja.data.model.brosur.DataBrosur
 import com.zerodev.kasremaja.root.App
 import com.zerodev.kasremaja.ui.history.HistoryActivity
 import com.zerodev.kasremaja.ui.notification.NotificationActivity
+import com.zerodev.kasremaja.ui.profile.ProfileActivity
 import com.zerodev.kasremaja.ui.webview.WebviewActivity
 import com.zerodev.kasremaja.utils.Converter
 import kotlinx.android.synthetic.main.activity_dashboard.*
@@ -47,7 +48,7 @@ class DashboardActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
 
-        when (SimpleDateFormat("hh").format(Date()).toInt()) {
+        when (SimpleDateFormat("HH").format(Date()).toInt()) {
             in 0..11 -> {
                 tvSayhello.text = "Selamat Pagi,"
             }
@@ -62,7 +63,7 @@ class DashboardActivity : AppCompatActivity(),
             }
         }
 
-        tvUsername.text = App.sessions!!.getString(Sessions.username)
+        tvUsername.text = App.sessions!!.getString(Sessions.fullname)
 
         viewModel = ViewModelProvider(this).get(DashboardViewModel::class.java)
 
@@ -119,6 +120,12 @@ class DashboardActivity : AppCompatActivity(),
         swDashboard.setOnRefreshListener {
             viewModel.getData(App.sessions!!.getString(Sessions.id_user))
         }
+
+        btnProfile.setOnClickListener{
+            startActivity(Intent(applicationContext, ProfileActivity::class.java))
+        }
+
+
     }
 
     override fun onStart() {
@@ -129,7 +136,10 @@ class DashboardActivity : AppCompatActivity(),
     private fun askForPermission() {
 
         val permission: String = Manifest.permission.WRITE_EXTERNAL_STORAGE
+        val permissionCam: String = Manifest.permission.CAMERA
+        val permissionCard: String = Manifest.permission.ACCESS_FINE_LOCATION
         val requestCode = 101
+        val requestCodeCard = 34
         if (ContextCompat.checkSelfPermission(
                 this,
                 permission
@@ -145,11 +155,23 @@ class DashboardActivity : AppCompatActivity(),
                     arrayOf(permission),
                     requestCode
                 )
+
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(permissionCard),
+                    requestCodeCard
+                )
             } else {
                 ActivityCompat.requestPermissions(
                     this,
                     arrayOf(permission),
                     requestCode
+                )
+
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(permissionCard),
+                    requestCodeCard
                 )
             }
         } else if (ContextCompat.checkSelfPermission(
@@ -214,5 +236,26 @@ class DashboardActivity : AppCompatActivity(),
         val manager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
         manager.enqueue(request)
         App.showToast.toastDown("Sedang Mendownload")
+    }
+
+    @SuppressLint("SimpleDateFormat", "SetTextI18n")
+    override fun onRestart() {
+        super.onRestart()
+        when (SimpleDateFormat("HH").format(Date()).toInt()) {
+            in 0..11 -> {
+                tvSayhello.text = "Selamat Pagi,"
+            }
+            in 12..14 -> {
+                tvSayhello.text = "Selamat Siang,"
+            }
+            in 15..17 -> {
+                tvSayhello.text = "Selamat Sore,"
+            }
+            else -> {
+                tvSayhello.text = "Selamat Malam,"
+            }
+        }
+
+        tvUsername.text = App.sessions!!.getString(Sessions.fullname)
     }
 }

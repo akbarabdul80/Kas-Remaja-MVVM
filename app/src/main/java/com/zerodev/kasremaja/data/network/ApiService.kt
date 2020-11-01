@@ -5,6 +5,8 @@ import com.zerodev.kasremaja.data.model.history.ResponseHistory
 import com.zerodev.kasremaja.data.model.kas.ResponseKas
 import com.zerodev.kasremaja.data.model.login.ResponseLogin
 import com.zerodev.kasremaja.data.model.notification.ResponseNotification
+import com.zerodev.kasremaja.data.model.password.ResponsePassword
+import com.zerodev.kasremaja.data.model.profile.ResponseEdit
 import io.reactivex.Single
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -59,5 +61,13 @@ class ApiService {
 
     fun getHistory() : Single<ResponseHistory>{
         return api.history()
+    }
+
+    fun updateUser(fullname: String, phone: String, email: String) : Single<ResponseEdit>{
+        return api.updateUser(fullname, phone, email)
+    }
+
+    fun updatePass(oldpass: String, newpass: String, repass: String) : Single<ResponsePassword>{
+        return api.updatePassword(oldpass, newpass, repass)
     }
 }

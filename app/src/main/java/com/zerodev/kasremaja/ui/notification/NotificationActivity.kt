@@ -5,13 +5,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.zerodev.kasremaja.R
 import com.zerodev.kasremaja.data.db.Sessions
 import com.zerodev.kasremaja.data.model.notification.DataNotification
 import com.zerodev.kasremaja.root.App
 import kotlinx.android.synthetic.main.activity_notification.*
 
-class NotificationActivity :
+class   NotificationActivity :
     AppCompatActivity() {
 
     lateinit var adapter: NotificationAdapter

@@ -19,7 +19,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".ui.history.HistoryActivity"></activity>
+        <activity android:name=".ui.profile.editPassword.PasswordActivity"></activity>
+        <activity android:name=".ui.profile.editProfile.EditActivity" />
+        <activity android:name=".ui.history.HistoryActivity" />
         <activity android:name=".ui.profile.ProfileActivity" />
         <activity android:name=".ui.notification.NotificationActivity" />
         <activity android:name=".ui.webview.WebviewActivity" />

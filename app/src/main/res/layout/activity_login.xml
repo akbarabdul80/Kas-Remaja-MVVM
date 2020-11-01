@@ -12,8 +12,8 @@
         android:id="@+id/txt_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/login"
         android:fontFamily="@font/bold"
+        android:text="@string/login"
         android:textColor="@color/white"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -27,12 +27,12 @@
         android:id="@+id/txt_login1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/title_login"
         android:fontFamily="@font/regular"
+        android:text="@string/title_login"
+        android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/txt_login"
-        app:layout_constraintTop_toBottomOf="@+id/txt_login"
-        android:textColor="@color/white"/>
+        app:layout_constraintTop_toBottomOf="@+id/txt_login" />
 
     <EditText
         android:id="@+id/etusername"
@@ -54,10 +54,10 @@
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/raund_edittext"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
         android:hint="@string/password"
         android:inputType="textPassword"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
         app:layout_constraintStart_toStartOf="@+id/etusername"
         app:layout_constraintTop_toBottomOf="@+id/etusername" />
 
@@ -65,8 +65,8 @@
         android:id="@+id/forget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/forget_password"
         android:layout_marginTop="10dp"
+        android:text="@string/forget_password"
         app:layout_constraintEnd_toEndOf="@+id/etpassword"
         app:layout_constraintTop_toBottomOf="@+id/etpassword" />
 
@@ -75,11 +75,14 @@
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:layout_marginTop="15dp"
-        android:hint="@string/login"
-        android:fontFamily="@font/regular"
-        android:textSize="20sp"
-        android:textColorHint="@color/white"
         android:background="@drawable/raund_signin"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/regular"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:hint="@string/login"
+        android:textColorHint="@color/white"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/etpassword"
         app:layout_constraintTop_toBottomOf="@+id/forget" />
 
@@ -90,10 +93,10 @@
         android:layout_height="50dp"
         android:layout_marginTop="100dp"
         android:background="@drawable/round_signup"
-        android:hint="@string/register"
         android:fontFamily="@font/regular"
-        android:textSize="20sp"
+        android:hint="@string/register"
         android:textColorHint="@color/white"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/etpassword"
         app:layout_constraintTop_toBottomOf="@+id/etpassword" />
 
