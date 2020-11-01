@@ -1,10 +1,10 @@
 <p align="center">
   <a href="#">
-		<h1 align="center">KAS REMAJA</h1>
+		<p align="center"><img src="screenshot/logo.png" alt="Kas Remaja Apps SS" width="150" height="50"></p>
   </a>
 </p>
 <p align="center">
-  KAS REMAJA merupakan project OpenSource yang di kembangkan oleh Zero Dev, yang bertujuan untuk mempermudah pengelolan administrasi dalam sebuah company, Project ini free dan open source (Boleh di kembangkan lagi)
+  KAS REMAJA merupakan project OpenSource yang di kembangkan oleh Zero Dev, yang bertujuan untuk mempermudah pengelolaan administrasi dalam sebuah company, Project ini free dan open source (Boleh di kembangkan lagi)
 </p>
 <span align="center">
  <hr>
