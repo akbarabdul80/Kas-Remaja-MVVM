@@ -4,7 +4,7 @@
   </a>
 </p>
 <p align="center">
-  KAS REMAJA merupakan project OpenSource yang di kembangkan oleh Zero Dev, yang bertujuan untuk mempermudah pengelolaan administrasi dalam sebuah organisasi atau kelompok, Project ini free dan open source (Boleh di kembangkan lagi)
+  KAS REMAJA merupakan project OpenSource yang di kembangkan oleh Zero Dev, yang bertujuan untuk mempermudah pengelolaan administrasi dalam sebuah organisasi atau kelompok, Project ini free dan open source (Boleh dikembangkan lagi)
 </p>
 <span align="center">
  <hr>
