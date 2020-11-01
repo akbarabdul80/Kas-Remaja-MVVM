@@ -16,4 +16,4 @@
  <p>KAS REMAJA App is created by [Zero](http://github.com/akbarabdul80)</p>
  <p>You can contact me at : akbarabdul80@gmail.com</p>
  <h1>License</h1>
- <p>CKAS REMAJA App is under the [Apache License](LICENSE)</p>
+ <p>KAS REMAJA App is under the [Apache License](LICENSE)</p>
