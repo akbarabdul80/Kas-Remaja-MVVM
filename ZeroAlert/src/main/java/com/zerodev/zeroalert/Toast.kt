@@ -18,18 +18,18 @@ import android.widget.Toast
 //        limitations under the License.
 
 class Toast(val context: Context) {
-
-    fun toastDown(message: String) {
-        StyleableToast.makeText(this.context, message, Toast.LENGTH_SHORT, R.style.toastdownload).show()
-    }
-
-    fun toastCheck(message: String) {
-        StyleableToast.makeText(this.context, message, Toast.LENGTH_SHORT, R.style.toastcheck).show()
-    }
-
-    fun toastEror(message: String) {
-        StyleableToast.makeText(this.context, message, Toast.LENGTH_SHORT, R.style.toasterror).show()
-    }
+//
+//    fun toastDown(message: String) {
+//        StyleableToast.makeText(this.context, message, Toast.LENGTH_SHORT, R.style.toastdownload).show()
+//    }
+//
+//    fun toastCheck(message: String) {
+//        StyleableToast.makeText(this.context, message, Toast.LENGTH_SHORT, R.style.toastcheck).show()
+//    }
+//
+//    fun toastEror(message: String) {
+//        StyleableToast.makeText(this.context, message, Toast.LENGTH_SHORT, R.style.toasterror).show()
+//    }
 
 //    fun toastThrowable(error: Throwable) {
 //        if (error is HttpException) {

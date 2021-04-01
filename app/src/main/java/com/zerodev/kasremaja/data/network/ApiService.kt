@@ -37,7 +37,7 @@ class ApiService {
             .build()
 
 
-        val server = "http://192.168.43.73/kas/api/"
+        val server = "http://192.168.1.243/kas/api/"
         api = Retrofit.Builder()
             .baseUrl(server)
             .client(client)
@@ -70,4 +70,5 @@ class ApiService {
     fun updatePass(oldpass: String, newpass: String, repass: String) : Single<ResponsePassword>{
         return api.updatePassword(oldpass, newpass, repass)
     }
+
 }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alexfu.sqlitequerybuilder.api.SQLiteQueryBuilder
 import com.zerodev.kasremaja.R
 import com.zerodev.kasremaja.data.model.history.DataHistory
 import com.zerodev.kasremaja.root.App
@@ -65,6 +66,7 @@ class HistoryActivity :
         swHistory.setOnRefreshListener {
             viewModel.getData()
         }
+
     }
 
     override fun onStart() {

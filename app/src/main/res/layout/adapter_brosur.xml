@@ -57,6 +57,15 @@
             app:layout_constraintTop_toBottomOf="@+id/tvSize"
             tools:ignore="SmallSp" />
 
+        <ImageView
+            android:id="@+id/ivDownloaded"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/ic_check_downloaded"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
