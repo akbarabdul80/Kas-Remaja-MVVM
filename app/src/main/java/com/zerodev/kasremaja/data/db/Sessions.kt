@@ -18,6 +18,9 @@ class Sessions(context : Context) {
         val fullname : String = "fullname"
         val img_user : String = "img_user"
         val level : String = "level"
+
+        val saldo : String = "saldo"
+        val saldoKas : String = "saldoKas"
     }
 
     var pref : SharedPreferences
@@ -37,8 +40,17 @@ class Sessions(context : Context) {
         editor!!.commit()
     }
 
+    fun putInt(key : String, value: Int) {
+        editor!!.putInt(key, value)
+        editor!!.commit()
+    }
+
     fun getString(key: String) : String{
         return pref.getString(key, "").toString()
+    }
+
+   fun getInt(key: String) : Int {
+        return pref.getInt(key, 0)
     }
 
 

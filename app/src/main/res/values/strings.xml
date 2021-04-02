@@ -40,4 +40,5 @@
     <string name="password_lama">Password Lama</string>
     <string name="password_baru">Password Baru</string>
     <string name="re_password">Re-Password</string>
+    <string name="title_offline">Offline Mode</string>
 </resources>

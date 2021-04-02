@@ -18,6 +18,8 @@ data class DataBrosur(
         const val TABLE_BROSUR = "table_brosur"
         const val ID = "id_brosur"
         const val TITLE = "title_brosur"
+        const val SIZE = "size_brosur"
+        const val DATE = "date_brosur"
         const val URL = "url_brosur"
         const val URLVIEW = "urlview_brosur"
         const val DOWNLOADED = "downloaded"

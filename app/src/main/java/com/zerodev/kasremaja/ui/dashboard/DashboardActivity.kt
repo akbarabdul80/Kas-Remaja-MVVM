@@ -37,6 +37,8 @@ import com.zerodev.kasremaja.utils.Converter
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.bottom_file.view.*
 import org.jetbrains.anko.db.delete
+import org.jetbrains.anko.sdk27.coroutines.onCheckedChange
+import org.jetbrains.anko.sdk27.coroutines.onTouch
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -54,11 +56,17 @@ class DashboardActivity : AppCompatActivity(),
 
     lateinit var dataSelect: DataBrosur
 
-    @SuppressLint("SimpleDateFormat", "SetTextI18n")
+    // Mode true == online <= offline
+    var mode: Boolean = false
+
+    @SuppressLint("SimpleDateFormat", "SetTextI18n", "Recycle")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
 
+        mode = intent.getBooleanExtra("mode", false)
+
+        sbOffline.isChecked = !mode
         when (SimpleDateFormat("HH").format(Date()).toInt()) {
             in 0..11 -> {
                 tvSayhello.text = "Selamat Pagi,"
@@ -75,9 +83,81 @@ class DashboardActivity : AppCompatActivity(),
         }
 
         tvUsername.text = App.sessions!!.getString(Sessions.fullname)
-
         viewModel = ViewModelProvider(this).get(DashboardViewModel::class.java)
 
+        initViewModel()
+        askForPermission()
+        initButton()
+
+
+        adapter = DashboardAdapter(data, this)
+        rvBrosur.also {
+            it.adapter = adapter
+            it.layoutManager = LinearLayoutManager(this)
+        }
+
+        updateMode()
+
+        sbOffline.onCheckedChange { buttonView, isChecked ->
+            run {
+                mode = !isChecked
+                updateMode()
+            }
+        }
+
+    }
+
+    fun updateMode() {
+        if (mode) {
+            viewModel.getData(App.sessions!!.getString(Sessions.id_user))
+        } else {
+            shDashboard.visibility = View.INVISIBLE
+            avKas.visibility = View.INVISIBLE
+            avSaldo.visibility = View.INVISIBLE
+            rvBrosur.visibility = View.VISIBLE
+            tvKas.visibility = View.VISIBLE
+            tvSaldo.visibility = View.VISIBLE
+            tvKas.text = Converter.formatRupiah(App.sessions!!.getInt(Sessions.saldoKas))
+            tvSaldo.text = Converter.formatRupiah(App.sessions!!.getInt(Sessions.saldo))
+            data.clear()
+            data.addAll(database!!.getAllBrosur())
+            adapter.notifyDataSetChanged()
+        }
+    }
+
+    private fun initButton() {
+        btnNotif.setOnClickListener {
+            startActivity(Intent(applicationContext, NotificationActivity::class.java))
+        }
+
+        btnHistory.setOnClickListener {
+            startActivity(Intent(applicationContext, HistoryActivity::class.java))
+        }
+
+        swDashboard.setOnRefreshListener {
+            if (mode) {
+                viewModel.getData(App.sessions!!.getString(Sessions.id_user))
+            } else {
+                shDashboard.visibility = View.INVISIBLE
+                avKas.visibility = View.INVISIBLE
+                avSaldo.visibility = View.INVISIBLE
+                rvBrosur.visibility = View.VISIBLE
+                tvKas.visibility = View.VISIBLE
+                tvSaldo.visibility = View.VISIBLE
+                tvKas.text = Converter.formatRupiah(App.sessions!!.getInt(Sessions.saldoKas))
+                tvSaldo.text = Converter.formatRupiah(App.sessions!!.getInt(Sessions.saldo))
+
+                data.addAll(database!!.getAllBrosur())
+                adapter.notifyDataSetChanged()
+            }
+        }
+
+        btnProfile.setOnClickListener {
+            startActivity(Intent(applicationContext, ProfileActivity::class.java))
+        }
+    }
+
+    fun initViewModel() {
         viewModel.state.observe(this, { state ->
             state?.let {
                 when (it) {
@@ -101,6 +181,9 @@ class DashboardActivity : AppCompatActivity(),
                         tvKas.text = Converter.formatRupiah(it.data.saldo)
                         tvSaldo.text = Converter.formatRupiah(it.data.kas)
 
+                        App.sessions!!.putInt(Sessions.saldo, it.data.kas)
+                        App.sessions!!.putInt(Sessions.saldoKas, it.data.saldo)
+
                         data.clear()
 
                         //cek file downloaded in sqlite
@@ -110,11 +193,8 @@ class DashboardActivity : AppCompatActivity(),
                                 null
                             )
                             cursor.moveToFirst()
-
                             it.downloaded = cursor.count == 1
-
                             data.add(it)
-
                         }
 
                         adapter.notifyDataSetChanged()
@@ -125,48 +205,15 @@ class DashboardActivity : AppCompatActivity(),
                 }
             }
         })
-
-        adapter = DashboardAdapter(data, this)
-        rvBrosur.also {
-            it.adapter = adapter
-            it.layoutManager = LinearLayoutManager(this)
-        }
-
-        askForPermission()
-
-        btnNotif.setOnClickListener {
-            startActivity(Intent(applicationContext, NotificationActivity::class.java))
-        }
-
-        btnHistory.setOnClickListener {
-            startActivity(Intent(applicationContext, HistoryActivity::class.java))
-        }
-
-        swDashboard.setOnRefreshListener {
-            viewModel.getData(App.sessions!!.getString(Sessions.id_user))
-        }
-
-        btnProfile.setOnClickListener {
-            startActivity(Intent(applicationContext, ProfileActivity::class.java))
-        }
-
-        SQLiteQueryBuilder.create().table("downloaded")
-            .column(Column("id", ColumnType.INTEGER, ColumnConstraint.PRIMARY_KEY))
-            .column(Column("id_brosur", ColumnType.INTEGER))
-            .build()
-
-        SQLiteQueryBuilder.select()
     }
 
     override fun onStart() {
         super.onStart()
-        viewModel.getData(App.sessions!!.getString(Sessions.id_user))
     }
 
     private fun askForPermission() {
 
         val permission: String = Manifest.permission.WRITE_EXTERNAL_STORAGE
-        val permissionCam: String = Manifest.permission.CAMERA
         val permissionCard: String = Manifest.permission.ACCESS_FINE_LOCATION
         val requestCode = 101
         val requestCodeCard = 34
@@ -226,7 +273,7 @@ class DashboardActivity : AppCompatActivity(),
         if (cursor.count == 1) {
             val file = File(
                 Environment.getExternalStorageDirectory().absolutePath + "/" + cursor.getString(
-                    5
+                    7
                 )
             )
 
@@ -313,14 +360,9 @@ class DashboardActivity : AppCompatActivity(),
             onComplete,
             IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
         )
-        registerReceiver(
-            onNotificationClick,
-            IntentFilter(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR)
-        )
+
         manager.enqueue(request)
         App.showToast.toastDown("Sedang Mendownload")
-
-
     }
 
     @SuppressLint("SimpleDateFormat", "SetTextI18n")
@@ -351,26 +393,11 @@ class DashboardActivity : AppCompatActivity(),
                 this.downloaded = true
             }
             adapter.notifyItemChanged(position)
-            val values = ContentValues()
-            values.put(DataBrosur.ID, dataSelect.id_brosur)
-            values.put(DataBrosur.TITLE, dataSelect.title_brosur)
-            values.put(DataBrosur.URL, dataSelect.url_brosur)
-            values.put(DataBrosur.URLVIEW, dataSelect.urlview_brosur)
-            values.put(DataBrosur.DOWNLOADED, "TRUE")
-            values.put(
-                DataBrosur.DIR,
-                Environment.DIRECTORY_DOWNLOADS + "/${dataSelect.title_brosur}.pdf"
-            )
 
-            db.insert(DataBrosur.TABLE_BROSUR, null, values)
+            database!!.insert(dataSelect)
 
             App.showToast.toastCheck("Download Selesai!")
         }
     }
 
-    var onNotificationClick: BroadcastReceiver = object : BroadcastReceiver() {
-        override fun onReceive(ctxt: Context, intent: Intent) {
-            Toast.makeText(ctxt, "Ummmm...hi!", Toast.LENGTH_LONG).show()
-        }
-    }
 }

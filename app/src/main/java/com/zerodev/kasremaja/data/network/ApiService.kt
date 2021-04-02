@@ -37,7 +37,7 @@ class ApiService {
             .build()
 
 
-        val server = "http://192.168.1.243/kas/api/"
+        val server = "http://kasremajaplupuh.000webhostapp.com/api/"
         api = Retrofit.Builder()
             .baseUrl(server)
             .client(client)
